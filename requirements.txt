@@ -1,0 +1,8 @@
+streamlit 
+langchain 
+google-generativeai 
+PyPDF2 
+faiss-cpu 
+SpeechRecognition 
+gTTS 
+pydub
