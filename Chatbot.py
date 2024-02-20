@@ -10,7 +10,7 @@ import os
 from gtts import gTTS
 from io import BytesIO
 
-os.environ['GOOGLE_API_KEY'] = 'Your_API_Key_Here'
+os.environ['GOOGLE_API_KEY'] = 'AIzaSyDeJfgMlMF1TJs_2DRRSn8FKfuUsDxDLWo'
 
 def get_pdf_text(pdf_reader):
     text = ""
