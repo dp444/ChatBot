@@ -1,8 +1,0 @@
-langchain 
-streamlit 
-streamlit-chat 
-chromadb==0.3.29 
-pypdf
-fastembed
-pysqlite3-binary
-requests
