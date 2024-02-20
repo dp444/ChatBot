@@ -57,7 +57,7 @@ def main():
     if "chatHistory" not in st.session_state:
         st.session_state.chatHistory = None
 
-    pdf_reader = PdfReader('TeReSA-AI/SamsungS24ultra/samsungs24ultradata.pdf')
+    pdf_reader = PdfReader('samsungs24ultradata.pdf')
 
     raw_text = get_pdf_text(pdf_reader)
     text_chunks = get_text_chunks(raw_text)
