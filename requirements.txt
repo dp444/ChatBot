@@ -4,3 +4,4 @@ streamlit-chat
 chromadb 
 pypdf
 fastembed
+pysqlite3-binary
