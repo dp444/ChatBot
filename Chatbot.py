@@ -59,7 +59,7 @@ def main():
     if "chatHistory" not in st.session_state:
         st.session_state.chatHistory = None
 
-    pdf_reader = PdfReader("CPGRAMS.pdf")
+    pdf_reader = PdfReader("CPGRAMS-Help.pdf")
 
     raw_text = get_pdf_text(pdf_reader)
     text_chunks = get_text_chunks(raw_text)
