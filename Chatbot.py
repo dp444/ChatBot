@@ -43,23 +43,23 @@ def user_input(user_question, pdf_reader):
         if i % 2 == 0:
             st.write("You: ", message.content)
         else:
-            st.write("DARPG: ", message.content)
+            st.write("CPGRAMS: ", message.content)
             tts = gTTS(message.content, lang='en')
             sound_file = BytesIO()
             tts.write_to_fp(sound_file)
             st.audio(sound_file, format="audio/mp3")
 
 def main():
-    st.set_page_config("CPGRAM Chatbot")
+    st.set_page_config("CPGRAMS Chatbot")
 
-    st.title("CPGRAM Chatbot")
+    st.title("CPGRAMS Chatbot")
     user_question = st.text_input("Query About product")
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
     if "chatHistory" not in st.session_state:
         st.session_state.chatHistory = None
 
-    pdf_reader = PdfReader("CPGRAMS-Help.pdf")
+    pdf_reader = PdfReader("CPGRAMS.pdf")
 
     raw_text = get_pdf_text(pdf_reader)
     text_chunks = get_text_chunks(raw_text)
