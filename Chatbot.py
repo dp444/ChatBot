@@ -1,3 +1,5 @@
+
+
 import streamlit as st
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -34,51 +36,43 @@ def get_conversational_chain(vector_store):
     conversation_chain = ConversationalRetrievalChain.from_llm(llm=llm, retriever=vector_store.as_retriever(), memory=memory)
     return conversation_chain
 
-def user_input(user_question, conversation):
-    response = conversation({'question': user_question})
-    chat_history = response['chat_history']
-    for i, message in enumerate(chat_history):
+def user_input(user_question, pdf_reader):
+    response = st.session_state.conversation({'question': user_question})
+    st.session_state.chatHistory = response['chat_history']
+    for i, message in enumerate(st.session_state.chatHistory):
         if i % 2 == 0:
             st.write("You: ", message.content)
         else:
-            st.write("TeReSA AI: ", message.content)
+            st.write("DARPG: ", message.content)
             tts = gTTS(message.content, lang='en')
             sound_file = BytesIO()
             tts.write_to_fp(sound_file)
             st.audio(sound_file, format="audio/mp3")
 
 def main():
-    st.set_page_config("TeReSA AI")
+    st.set_page_config("CPGRAM Chatbot")
 
-    st.title("TeReSA AI")
+    st.title("CPGRAM Chatbot")
     user_question = st.text_input("Query About product")
     if "conversation" not in st.session_state:
         st.session_state.conversation = None
     if "chatHistory" not in st.session_state:
         st.session_state.chatHistory = None
 
-    pdf_reader = PdfReader('samsungs24ultradata.pdf')
+    pdf_reader = PdfReader("CPGRAMS-Help.pdf")
 
     raw_text = get_pdf_text(pdf_reader)
     text_chunks = get_text_chunks(raw_text)
     vector_store = get_vector_store(text_chunks)
-    
-    if st.session_state.conversation is None:
-        st.session_state.conversation = get_conversational_chain(vector_store)
+    st.session_state.conversation = get_conversational_chain(vector_store)
+  
 
     if user_question:
-        user_input(user_question, st.session_state.conversation)
-
-    display_messages()
-
-def display_messages():
-    st.subheader("Chat")
-    if "chat_history" in st.session_state:
-        for i, message in enumerate(st.session_state.chat_history):
-            if i % 2 == 0:
-                st.write("You: ", message.content)
-            else:
-                st.write("TeReSA AI: ", message.content)
+        user_input(user_question, pdf_reader)
 
 if __name__ == "__main__":
     main()
+
+
+
+
